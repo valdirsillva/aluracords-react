@@ -1,6 +1,8 @@
+import React from 'react';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 
 import appConfig from '../config.json';
+
 
 
 function GlobalStyle() {
@@ -37,7 +39,6 @@ function GlobalStyle() {
       `}</style>
     );
 }
-
 
 function Titulo(props) {
 
@@ -79,7 +80,14 @@ function Titulo(props) {
 
 
 export default function PaginaInicial() {
-    const username = 'valdirsillva';
+    const [username, setUsername] = React.useState('valdirsillva');
+
+    function handleChange(valorDigitado) {
+      // atualiza o valor quando o usuário digitar
+      setUsername(valorDigitado);
+    }
+
+
   
     return (
       <>
@@ -119,8 +127,14 @@ export default function PaginaInicial() {
               <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
                 {appConfig.name}
               </Text>
+
+              <input 
+               type="text" 
+               value={username}
+               onChange={event => handleChange(event.target.value)}
+               />
   
-              <TextField
+              {/* <TextField
                 fullWidth
                 textFieldColors={{
                   neutral: {
@@ -130,7 +144,7 @@ export default function PaginaInicial() {
                     backgroundColor: appConfig.theme.colors.neutrals[800],
                   },
                 }}
-              />
+              /> */}
               <Button
                 type='submit'
                 label='Entrar'
