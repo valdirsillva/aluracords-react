@@ -52,9 +52,12 @@ export default function PaginaInicial() {
 
     function handleChange(valorDigitado) {
       console.log('Estou recebendo algo do input ');
+      let minValue = 5;
 
-      // atualiza o valor quando o usuário digitar
-      setUsername(valorDigitado);
+      if (valorDigitado.length >= minValue) {
+          // atualiza o valor quando o usuário digitar
+          setUsername(valorDigitado);
+      }
     }
 
     function handleSubmit() {
