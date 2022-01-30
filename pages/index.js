@@ -74,11 +74,7 @@ export default function PaginaInicial() {
 
           event.playbackRate = 0.3;
 
-        console.log('esta rodando');
       
-// function slowPlaySpeed() { 
-//     vid.playbackRate = 0.5;
-// } 
     }
 
 

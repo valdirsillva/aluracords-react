@@ -15,6 +15,7 @@ function GlobalStyle() {
         
         body {
           font-family: 'Open Sans', sans-serif;
+         
         }
         
         /* App fit Height */ 
@@ -22,8 +23,8 @@ function GlobalStyle() {
           min-height: 100vh;
           display: flex;
           flex: 1;
-
           overflow: hidden;
+
         }
 
         #__next {
@@ -39,7 +40,7 @@ function GlobalStyle() {
 }
 
 export default function MyApp({ Component, pageProps }) {
-    console.log('roda em todas as paginas ');
+    // console.log('roda em todas as paginas ');
     return (
        <>
          <GlobalStyle />

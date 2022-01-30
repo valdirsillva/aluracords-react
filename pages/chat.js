@@ -85,7 +85,8 @@ export default function ChatPage() {
                 backgroundColor: appConfig.theme.colors.primary[500],
                 backgroundImage: `url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)`,
                 backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
-                color: appConfig.theme.colors.neutrals['000']
+                color: appConfig.theme.colors.neutrals['000'],
+                 
             }}
         >
             <Box
@@ -100,6 +101,9 @@ export default function ChatPage() {
                     maxWidth: '95%',
                     maxHeight: '95vh',
                     padding: '32px',
+                  
+
+                   
                 }}
             >
                 <Header />
@@ -113,6 +117,7 @@ export default function ChatPage() {
                         flexDirection: 'column',
                         borderRadius: '5px',
                         padding: '16px',
+                       
                     }}
                 >
                     <MessageList mensagens={listaDeMensagens} />
@@ -145,6 +150,7 @@ export default function ChatPage() {
                                 backgroundColor: appConfig.theme.colors.neutrals[800],
                                 marginRight: '12px',
                                 color: appConfig.theme.colors.neutrals[200],
+                               
                             }}
                         />
                         
@@ -166,7 +172,7 @@ export default function ChatPage() {
 function Header() {
     return (
         <>
-            <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
+            <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'   }} >
                 <Text variant='heading5'>
                     Chat
                 </Text>
@@ -187,7 +193,7 @@ function MessageList(props) {
         <Box
             tag="ul"
             styleSheet={{
-                overflow: 'scroll',
+                overflowY: 'scroll',
                 display: 'flex',
                 flexDirection: 'column-reverse',
                 flex: 1,
@@ -197,6 +203,8 @@ function MessageList(props) {
         >
             {props.mensagens.map((mensagem) => {
                 return (
+                   
+
                     <Text
                         key={mensagem.id}
                         tag="li"
@@ -208,7 +216,10 @@ function MessageList(props) {
                                 backgroundColor: appConfig.theme.colors.neutrals[700],
                             }
                         }}
+
+                        
                     >
+                        
                         <Box
                             styleSheet={{
                                 marginBottom: '8px',
