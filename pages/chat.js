@@ -15,7 +15,19 @@ export default function ChatPage() {
     const usuarioLogado = roteamento.query.username;
 
     const [mensagem, setMensagem] = React.useState('');
-    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+    const [listaDeMensagens, setListaDeMensagens] = React.useState([
+        // {
+        //     id: 1,
+        //     de: 'valdirsillva',
+        //     texto: ':sticker: https://c.tenor.com/TKpmh4WFEsAAAAAC/alura-gaveta-filmes.gif',
+        // },
+
+        // {
+        //     id: 2,
+        //     de: 'peas',
+        //     texto: 'mensagem nao e sticker',
+        // }
+    ]);
 
     React.useEffect(() => {
         supabaseClient.from('mensagens')
@@ -130,7 +142,15 @@ export default function ChatPage() {
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
                         />
-                        <ButtonSendSticker />
+                        
+                        {/* callback */}
+                        <ButtonSendSticker 
+                           onStickerClick={(sticker) => {
+                            //    console.log('salve esse sticker no banco de dados');
+                               handleNovaMensagem(':sticker:' +  sticker);
+                           }}
+                        />
+
                     </Box>
                 </Box>
             </Box>
@@ -213,7 +233,16 @@ function MessageList(props) {
                                 {(new Date().toLocaleDateString())}
                             </Text>
                         </Box>
-                        {mensagem.texto}
+                        condicional: {mensagem.texto.startsWith(':sticker:').toString()}
+                        
+                        {/* condicional Declarativo */}
+                        {mensagem.texto.startsWith(':sticker:') ? (
+                              <Image src={mensagem.texto.replace(':sticker:', '')} />
+                            ) : (
+                                mensagem.texto
+                            )}
+
+                        {/* {mensagem.texto} */}
                     </Text>
                 );
             })}
