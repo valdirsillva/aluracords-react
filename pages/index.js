@@ -64,7 +64,7 @@ export default function PaginaInicial() {
        event.preventDefault();
       //  window.location.href = '/chat';
 
-       routeamento.push('/chat');
+       routeamento.push(`/chat?username=${username}`);
      
     }
 
