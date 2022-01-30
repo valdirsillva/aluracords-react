@@ -9,6 +9,8 @@ function GlobalStyle() {
           padding: 0;
           box-sizing: border-box;
           list-style: none;
+
+         
         }
         
         body {
@@ -20,6 +22,8 @@ function GlobalStyle() {
           min-height: 100vh;
           display: flex;
           flex: 1;
+
+          overflow: hidden;
         }
 
         #__next {

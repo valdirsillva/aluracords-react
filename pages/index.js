@@ -3,6 +3,8 @@ import { useRouter }  from 'next/router';
 import { Box, Button, Text, TextField, Image } from '@skynexui/components';
 
 import appConfig from '../config.json';
+// import video '../public/video.mp4';
+
 
 
 function Titulo(props) {
@@ -68,6 +70,17 @@ export default function PaginaInicial() {
      
     }
 
+    function timeReproduction() {
+
+          event.playbackRate = 0.3;
+
+        console.log('esta rodando');
+      
+// function slowPlaySpeed() { 
+//     vid.playbackRate = 0.5;
+// } 
+    }
+
 
   
     return (
@@ -75,11 +88,43 @@ export default function PaginaInicial() {
         <Box
           styleSheet={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            backgroundColor: appConfig.theme.colors.primary[500],
-            backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
-            backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
+            // backgroundColor: appConfig.theme.colors.primary[500],
+            // backgroundImage: 'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+            // backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundBlendMode: 'multiply',
           }}
         >
+
+
+          <video 
+           
+            autoplay="autoplay"
+            muted
+            loop
+            
+          
+            >
+            <source src="video.mp4" type="video/mp4"/>
+         </video>
+           
+         <style jsx>{`
+            
+           
+            
+            video {
+                width="100%" 
+                height="100%"
+                color:  ${appConfig.theme.colors.neutrals['000']};
+                font-size: 24px;
+                font-weight: 600;
+                display: flex;
+                position: absolute;
+                z-index: -1;
+                box-sizing: border-box;
+                
+            }
+
+            `}</style>
+      
           <Box
             styleSheet={{
               display: 'flex',

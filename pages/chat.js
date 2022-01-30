@@ -5,9 +5,19 @@ import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js'
 import { ButtonSendSticker } from '../source/components/ButtonSendSticker';
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMzOTU4NSwiZXhwIjoxOTU4OTE1NTg1fQ.bGTuZHSpvK_gKGFRXu0WnTBd4CueFMw5s3B2NOlGsV8';
-const SUPABASE_URL = 'https://eprscohxyxutyrdkrtvp.supabase.co'; 
+const SUPABASE_ANON_KEY = process.env.ANON_KEY;
+const SUPABASE_URL =  process.env.URL;
+
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+function listenerMessagensRealTime(addMessage) {
+    return supabaseClient
+           .from('mensagens')
+           .on('INSERT', (responseLive) => {
+               addMessage(responseLive.new);
+           })
+           .subscribe();
+}
 
 
 export default function ChatPage() {
@@ -15,26 +25,24 @@ export default function ChatPage() {
     const usuarioLogado = roteamento.query.username;
 
     const [mensagem, setMensagem] = React.useState('');
-    const [listaDeMensagens, setListaDeMensagens] = React.useState([
-        // {
-        //     id: 1,
-        //     de: 'valdirsillva',
-        //     texto: ':sticker: https://c.tenor.com/TKpmh4WFEsAAAAAC/alura-gaveta-filmes.gif',
-        // },
-
-        // {
-        //     id: 2,
-        //     de: 'peas',
-        //     texto: 'mensagem nao e sticker',
-        // }
-    ]);
+    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
     React.useEffect(() => {
         supabaseClient.from('mensagens')
         .select('*').order('id', { ascending: false})
         .then(({ data }) => {    
             setListaDeMensagens(data);
-        })
+        });
+
+        listenerMessagensRealTime((novaMensagem) => {
+            //handleNovaMensagem(novaMensagem);
+            setListaDeMensagens((valorAtualDaLista) => {
+                return [
+                    novaMensagem,
+                    ...valorAtualDaLista,
+                ]
+            });
+        });
 
     }, []);
 
@@ -63,11 +71,8 @@ export default function ChatPage() {
                 mensagem
             ])
             .then(({ data }) => {
-                console.log('Criando a mensagem', data);
-                setListaDeMensagens([
-                    data[0],
-                    ...listaDeMensagens,
-                ]);
+                // console.log('Criando a mensagem', data);
+               
             });
       
         setMensagem('');
@@ -233,7 +238,6 @@ function MessageList(props) {
                                 {(new Date().toLocaleDateString())}
                             </Text>
                         </Box>
-                        condicional: {mensagem.texto.startsWith(':sticker:').toString()}
                         
                         {/* condicional Declarativo */}
                         {mensagem.texto.startsWith(':sticker:') ? (
